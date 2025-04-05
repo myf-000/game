@@ -9,4 +9,4 @@ class Peashooter(Entity):
         self.need_shoot = True
 
     def shoot(self):
-        return Bullet(self.rect.right,self.rect.y,5)
+        return Bullet(self.rect.right,self.rect.y+15,5)

@@ -17,8 +17,8 @@ screen = pygame.display.set_mode((1250,720))                           #设置�
 
 # 定义植物
 plant_sprites = pygame.sprite.Group()
-xiaobai = Xiaobai(400,350)
-plant_sprites.add(xiaobai)
+# xiaobai = Xiaobai(400,350)
+# plant_sprites.add(xiaobai)
 
 image_path = os.path.join(os.getcwd(), "..", "resource","images")      #获取图片路径
 background_path = os.path.join(image_path,"background1.jpg")           #拼接背景图片完整路径
@@ -36,7 +36,7 @@ xiaobai_card = XiaobaiCard(220,40)
 
 card_sprites.add(sunflower_card)
 card_sprites.add(pea_card)
-#card_sprites.add(xiaobai_card)
+card_sprites.add(xiaobai_card)
 #card_sprites.add(shovel_card)
 
 # 定义子弹
@@ -126,7 +126,7 @@ while True:                                                            #游戏�
     card_sprites.update(index)
 
     for plant in plant_sprites:
-        if index % 20 == 0:
+        if index % 13 == 0:
             bullet = plant.shoot()
             if bullet:
                 bullet_sprites.add(bullet)

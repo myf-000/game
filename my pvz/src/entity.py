@@ -7,16 +7,16 @@ class Entity(pygame.sprite.Sprite):
         self.image_path = os.path.join(os.getcwd(), "..", "resource","images")
         self.images = []
         self.image_count = image_count
-        Entity_SIZE = (100,100)
+       # Entity_SIZE = (100,100)
         if image_count == 1:
             img = pygame.image.load(os.path.join(self.image_path, "{}.png".format(image_name))).convert_alpha()
-            img  = pygame.transform.scale(img , Entity_SIZE)
+           # img  = pygame.transform.scale(img , Entity_SIZE)
 
             self.images.append(img)
         else:
             for i in range(0, image_count):
                 img = pygame.image.load(os.path.join(self.image_path, "{}_{:02d}.png".format(image_name,i))).convert_alpha()
-                img  = pygame.transform.scale(img , Entity_SIZE)
+               # img  = pygame.transform.scale(img , Entity_SIZE)
                 self.images.append(img)
 
         self.image = self.images[0]
