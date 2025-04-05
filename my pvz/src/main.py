@@ -38,12 +38,13 @@ card_sprites = pygame.sprite.Group()
 sunflower_card = SunflowerCard(100,40)
 pea_card = PeaShooterCard(160,40)
 xiaobai_card = XiaobaiCard(220,40)
-#shovel_card = ShovelCard(100,300)
+shovel_card = ShovelCard(500,40)
 
 card_sprites.add(sunflower_card)
-card_sprites.add(pea_card)
+
 card_sprites.add(xiaobai_card)
-#card_sprites.add(shovel_card)
+card_sprites.add(pea_card)
+card_sprites.add(shovel_card)
 
 # 定义子弹
 bullet_sprites = pygame.sprite.Group()
@@ -68,6 +69,7 @@ zombie_sprites.add(zombie3)
 
 
 choose = None
+select_card = None
 dragging = False                                                       #是否处于拖动图片的状态
 while True:                                                            #游戏主循环
     if index > 100:                                                    #当index大于100时
@@ -83,47 +85,28 @@ while True:                                                            #游戏�
 
                 for card in card_sprites:
                     if card.rect.collidepoint(x,y):
-                        dragging = True
                         if card.name == "Sunflower":
-                            dragging = True
                             choose = Sunflower(x,y)
                         elif card.name == "Peashooter":
-                            dragging = True
                             choose = Peashooter(x,y)
                         elif card.name == "Xiaobai":
-                            dragging = True
                             choose = Xiaobai(x,y)
                         elif card.name == "Shovel":
-                            dragging = True
-                            choose = Shovel(x,y)    
+                            choose = Shovel(x,y)
                         else:
-                            dragging = False
                             choose = None
-                        print("choose",choose)
-                        print("dragging",dragging)
-                    else:
-                        choose = None
+
+                        if choose:
+                            plant_sprites.add(choose)
+                        break
         
         if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:
-                if dragging and choose:
-                    x,y = event.pos
-                    print("1",choose)
-                    plant_sprites.add(choose)
-
-                    print("2",choose)
-                    if choose.name == "Peashooter":
-                        print(choose)
-                    if choose.name == "Sunflower":
-                        print(choose)
-                        # bullet = Bullet(x,y)
-                        # bullet_sprites.add(bullet)
-                    dragging = False
-
+                x,y = event.pos
+                choose = None
 
         if event.type == pygame.MOUSEMOTION:
-            if dragging and choose:
-                print("3",choose)
+            if choose:
                 choose.rect.center = event.pos
 
     zombie_sprites.update(index)
@@ -132,7 +115,7 @@ while True:                                                            #游戏�
     card_sprites.update(index)
 
     for plant in plant_sprites:
-        if index % 13 == 0:
+        if index % 33 == 0:
             bullet = plant.shoot()
             if bullet:
                 bullet_sprites.add(bullet)
@@ -157,8 +140,8 @@ while True:                                                            #游戏�
     card_sprites.draw(screen)
 
    
-    if choose:                                        
-        screen.blit(choose.images[index % choose.image_count],choose.rect)                      #绘制peashooter图片
+    # if choose:                                        
+    #     screen.blit(choose.images[index % choose.image_count],choose.rect)                      #绘制peashooter图片
 
     pygame.display.flip()                                           #更新屏幕
 

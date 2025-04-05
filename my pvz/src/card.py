@@ -13,6 +13,16 @@ class Card(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (center_x, center_y)
 
+    def start_drag(self):
+        self.dragging = True
+
+    def stop_drag(self):    
+        self.dragging = False       
+
+    def drag(self, dx, dy):
+        if self.dragging:
+            self.rect.center(dx, dy)
+
 
 class SunflowerCard(Card):
     def __init__(self,center_x,center_y):
