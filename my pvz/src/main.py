@@ -12,8 +12,14 @@ from card import SunflowerCard, PeaShooterCard, ShovelCard,XiaobaiCard
 
 
 
-pygame.init() 
+pygame.init()
+pygame.mixer.init()
 screen = pygame.display.set_mode((1250,720))                           #设置屏幕大小
+
+# 音乐
+pygame.mixer.music.load(os.path.join(os.getcwd(), "..", "resource","music","18 - Crazy Dave IN-GAME.mp3"))   #加载背景音乐
+pygame.mixer.music.play(-1)                                            #播放背景音乐，-1表示循环播放
+
 
 # 定义植物
 plant_sprites = pygame.sprite.Group()
