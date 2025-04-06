@@ -5,7 +5,11 @@
             "zombies": [
                 {
                     "name": "xiaojimao",
-                    "count": 10
+                    "count": 4
+                },
+                {
+                    "name": "xiaojimao_jump",
+                    "count": 1
                 }
             ]
         },
@@ -17,7 +21,36 @@
                     "count": 3
                 },
                 {
-                    "name": "xiaojimaojump",
+                    "name": "xiaojimao_jump",
+                    "count": 3
+                },
+                {
+                    "name": "xiaojimao_bag",
+                    "count": 3
+                }
+            ]
+        },
+        {
+            "stage_time": 20000,
+            "zombies": [
+                {
+                    "name": "xiaojimao",
+                    "count": 3
+                },
+                {
+                    "name": "xiaojimao_jump",
+                    "count": 3
+                },
+                {
+                    "name": "xiaojimao_bag",
+                    "count": 3
+                },
+                {
+                    "name": "xiaojimao_strong",
+                    "count": 3
+                },
+                {
+                    "name": "xiaojimao_music",
                     "count": 3
                 }
             ]

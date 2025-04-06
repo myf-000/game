@@ -12,7 +12,7 @@ from sun import Sun
 from grid import Grid
 from zombie_factory import ZombieFactory
 
-money = 50
+money = 5000
 
 pygame.init()
 pygame.mixer.init()
@@ -98,7 +98,6 @@ select_y = 0
 select_image = None
 
 zombie_factory = ZombieFactory()
-zombie_factory.prepare_stage_zombie(0)
 while True:                                                            #游戏主循环
     if index > 100:                                                    #当index大于100时
         index = 0                                                      #重置index

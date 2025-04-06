@@ -48,3 +48,15 @@ class Xiaojimao(Zombie):
 class Xiaojimaojump(Zombie):
     def __init__(self,top,left):
         super().__init__("xiaojimao_jump",top,left)
+
+class Xiaojimaobag(Zombie):
+    def __init__(self,top,left):
+        super().__init__("xiaojimao_bag",top,left)
+
+class Xiaojimaomusic(Zombie):
+    def __init__(self,top,left):
+        super().__init__("xiaojimao_music",top,left)
+
+class Xiaojimaostrong(Zombie):
+    def __init__(self,top,left):
+        super().__init__("xiaojimao_strong",top,left)
