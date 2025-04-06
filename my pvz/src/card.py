@@ -27,7 +27,7 @@ class Card(pygame.sprite.Sprite):
 class SunflowerCard(Card):
     def __init__(self,center_x,center_y):
         super().__init__("Sunflower",center_x,center_y)
-        self.name = "Sunflower"
+        self.name = "sunflower"
 
 class PeaShooterCard(Card):
     def __init__(self,center_x,center_y):
@@ -42,5 +42,5 @@ class ShovelCard(Card):
 class XiaobaiCard(Card):
     def __init__(self,center_x,center_y):
         super().__init__("xiaobai_wandousheshou",center_x,center_y)
-        self.name = "Xiaobai"
+        self.name = "xiaobai"
 

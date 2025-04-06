@@ -1,0 +1,35 @@
+{
+    "zombie_1": {
+        "name": "zombie_1",
+        "damage": 20,
+        "cooldown": 1000,
+        "image_name": "Zombie",
+        "image_count": 21,
+        "speed": 1,
+        "direction": "left",
+        "health": 100,
+        "level": 1
+    },
+    "xiaojimao":{
+        "name": "xiaojimao",
+        "damage": 20,
+        "cooldown": 1000,
+        "image_name": "xiaojimao_jiangshi",
+        "image_count": 13,
+        "speed": 1,
+        "direction": "left",
+        "health": 300,
+        "level": 2
+    },
+    "xiaojimao_jump":{
+        "name": "xiaojimao_jump",
+        "damage": 20,
+        "cooldown": 1000,
+        "image_name": "xiaojimao_jump",
+        "image_count": 14,
+        "speed": 2,
+        "direction": "left",
+        "health": 100,
+        "level": 2
+    }
+}

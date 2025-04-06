@@ -38,6 +38,13 @@ class Grid:
                 return True
         return False
 
+    def remove_plant(self, plant):
+        for x in range(self.width):
+            for y in range(self.height):
+                if self.grid[x][y] == plant:
+                    self.grid[x][y] = None
+                    return True
+        return False
 
     def draw(self, screen):
         # 绘制网格背景
