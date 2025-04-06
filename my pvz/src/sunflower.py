@@ -4,14 +4,9 @@ from sun import Sun
         
 class Sunflower(Plant):
     def __init__(self,top,left):
-        super().__init__("Sunflower",13,top,left)
-        self.health = 100
-        self.damage = 0
-        self.cooldown = 5000
+        super().__init__("sunflower",top,left)
         self.last_produced_time = 0
-        self.can_produce = False
-        self.production_type = "sun"
-        self.production_count = 1
+        self.can_produce = True
         self.production = None
 
     def produce(self):

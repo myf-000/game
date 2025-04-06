@@ -5,7 +5,7 @@ import os      #引入操作系统库
 from peashooter import Peashooter       #代入自己写的peashooter中的Peashooter类
 from sunflower import Sunflower         #代入自己写的sunflower中的Sunflower类
 from shovel import Shovel
-from zombie import Zombie,Xiaojimao,GameOver
+from zombie import Zombie,Xiaojimao
 from bullet import Bullet
 from xiaobai import Xiaobai
 from card import SunflowerCard, PeaShooterCard, ShovelCard,XiaobaiCard
@@ -140,7 +140,9 @@ while True:                                                            #游戏�
                     grid_pos = grid.get_grid_pos(x,y)
                     if grid_pos:
                         grid_x,grid_y = grid_pos
-                        grid.place_plant(choose,grid_x,grid_y)
+                        if not grid.place_plant(choose,grid_x,grid_y):
+                            money += choose.price
+                            choose.kill()
                 choose = None
 
         # 鼠标移动

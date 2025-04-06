@@ -1,17 +1,23 @@
 from entity import Entity
+from utils import load_json
 
 class Plant(Entity):
-    def __init__(self,image_name,image_count,center_x,center_y,speed=0,direction="right"):
+    def __init__(self,plant_name,center_x,center_y):
+        data = load_json("plant.json")
+        image_name = data[plant_name]["image_name"]
+        image_count = data[plant_name]["image_count"]
+        speed = data[plant_name]["speed"]
+        direction = data[plant_name]["direction"]
         super().__init__(image_name,image_count,center_x,center_y,speed,direction)
-        self.health = 0
-        self.damage = 0
-        self.cooldown = 0
+        self.health = data[plant_name]["health"]
+        self.damage = data[plant_name]["damage"]
+        self.cooldown = data[plant_name]["cooldown"]
         self.last_produced_time = 0
         self.can_produce = True
-        self.production_type = None
-        self.production_count = 0
+        self.production_type = data[plant_name]["production_type"]
+        self.production_count = data[plant_name]["production_count"]
         self.production = None
-        self.price = 0
+        self.price = data[plant_name]["price"]
 
     def update(self,index,current_time):
         super().update(index)

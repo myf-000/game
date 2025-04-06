@@ -4,16 +4,10 @@ from bullet import Bullet
     
 class Xiaobai(Plant):
     def __init__(self,top,left):
-        super().__init__("xiaobai_wandousheshou",13,top,left)
-        self.health = 100
-        self.damage = 20
-        self.cooldown = 1000
+        super().__init__("xiaobai",top,left)
         self.last_produced_time = 0
         self.can_produce = True
-        self.production_type = "bullet"
-        self.production_count = 1
         self.production = None
-        self.price = 100
 
     def produce(self):
         if self.can_produce:

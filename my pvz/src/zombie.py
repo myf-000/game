@@ -63,7 +63,3 @@ class Xiaojimao(Entity):
 
     def stop(self):
         self.speed = 0
-
-class GameOver(Entity):
-    def __init__(self,top,left):
-        super().__init__("GameOver",1,top,left)
