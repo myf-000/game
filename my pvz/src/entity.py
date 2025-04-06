@@ -32,7 +32,7 @@ class Entity(pygame.sprite.Sprite):
         if self.speed <= 0:
             return
 
-        if self.rect.left > 100:
+        if self.rect.left > 0:
             if self.direction == "right":
                 self.rect.right += self.speed
             elif self.direction == "left":

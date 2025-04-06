@@ -7,6 +7,8 @@ class Peashooter(Entity):
         self.name = "Peashooter"
         self.bullet_delay = 5
         self.need_shoot = True
+        self.health = 100
 
     def shoot(self):
         return Bullet(self.rect.right,self.rect.y+15,5)
+    
