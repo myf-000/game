@@ -1,18 +1,26 @@
 {
-    "flow_1": [
+    "stages": [
         {
-            "name": "xiaojimao",
-            "count": 5
-        }
-    ],
-    "flow_2": [
-        {
-            "name": "xiaojimao",
-            "count": 3
+            "stage_time": 1500,
+            "zombies": [
+                {
+                    "name": "xiaojimao",
+                    "count": 10
+                }
+            ]
         },
         {
-            "name": "xiaojimaojump",
-            "count": 3
+            "stage_time": 20000,
+            "zombies": [
+                {
+                    "name": "xiaojimao",
+                    "count": 3
+                },
+                {
+                    "name": "xiaojimaojump",
+                    "count": 3
+                }
+            ]
         }
     ]
 }

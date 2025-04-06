@@ -10,6 +10,7 @@ from xiaobai import Xiaobai
 from card import SunflowerCard, PeaShooterCard, ShovelCard,XiaobaiCard
 from sun import Sun
 from grid import Grid
+from zombie_factory import ZombieFactory
 
 money = 50
 
@@ -78,17 +79,17 @@ zombie_sprites = pygame.sprite.Group()
 # zombie2 = Zombie(1000,200)
 # zombie3 = Zombie(1000,300)
 
-xiaojimao1 = Xiaojimao(1000,400)
-xiaojimao2 = Xiaojimao(1000,500)
-xiaojimaojump = Xiaojimaojump(1000,200)
+# xiaojimao1 = Xiaojimao(1000,400)
+# xiaojimao2 = Xiaojimao(1000,500)
+# xiaojimaojump = Xiaojimaojump(1000,200)
 
 # zombie_sprites.add(zombie1)
 # zombie_sprites.add(zombie2)
 # zombie_sprites.add(zombie3)
 
-zombie_sprites.add(xiaojimao1)
-zombie_sprites.add(xiaojimao2)
-zombie_sprites.add(xiaojimaojump)
+# zombie_sprites.add(xiaojimao1)
+# zombie_sprites.add(xiaojimao2)
+# zombie_sprites.add(xiaojimaojump)
 
 choose = None
 select_card = None
@@ -96,9 +97,13 @@ select_x = 0
 select_y = 0
 select_image = None
 
+zombie_factory = ZombieFactory()
+zombie_factory.prepare_stage_zombie(0)
 while True:                                                            #游戏主循环
     if index > 100:                                                    #当index大于100时
         index = 0                                                      #重置index
+
+
 
     # 绘制游戏背景
     screen.fill((0,0,0))                                              #清空屏幕，填充颜色
@@ -173,6 +178,10 @@ while True:                                                            #游戏�
     bullet_sprites.update(index)
     card_sprites.update(index)
     sun_sprites.update(index, current_time)
+    zombie = zombie_factory.update(current_time)
+
+    if zombie is not None:
+        zombie_sprites.add(zombie)
 
     # 判断僵尸是否胜利
     for zombie in zombie_sprites:

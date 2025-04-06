@@ -6,8 +6,8 @@
         "cooldown": 5000,
         "production_type": "sun",
         "production_count": 1,
-        "image_name" : "Sunflower",
-        "image_count": 13,
+        "image_name" : "xiaobai_sunflower",
+        "image_count": 18,
         "speed": 0,
         "direction": 0,
         "health": 100
