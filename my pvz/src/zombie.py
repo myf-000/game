@@ -14,7 +14,7 @@ class Zombie(Entity):
         self.damage = date[zombie_name]["damage"]
         self.attack_cooldown = date[zombie_name]["cooldown"]
         self.last_attack_time = 0
-        self.level = 1
+        self.level = date[zombie_name]["level"]
         self.win = False
 
     def update(self,index):

@@ -12,7 +12,7 @@ from sun import Sun
 from grid import Grid
 from zombie_factory import ZombieFactory
 
-money = 100
+money = 200
 
 pygame.init()
 pygame.mixer.init()
@@ -93,6 +93,7 @@ zombie_sprites = pygame.sprite.Group()
 # zombie_sprites.add(xiaojimao2)
 # zombie_sprites.add(xiaojimaojump)
 
+score = 0
 state = None
 choose = None
 select_card = None
@@ -100,7 +101,7 @@ select_x = 0
 select_y = 0
 select_image = None
 
-zombie_factory = ZombieFactory(grid)
+zombie_factory = ZombieFactory(grid,"forever")
 while True:                                                            #游戏主循环
     if index > 100:                                                    #当index大于100时
         index = 0                                                      #重置index
@@ -209,6 +210,7 @@ while True:                                                            #游戏�
         for bullet in bullets:
             zombie.health -= bullet.damage
             if zombie.health <= 0:
+                score += zombie.level
                 zombie.kill()
 
     # 僵尸和植物碰撞检测
@@ -235,6 +237,9 @@ while True:                                                            #游戏�
     text = font.render(str(money), True, (0,0,0))
     screen.blit(text,(30,65))
 
+    font = pygame.font.Font(None, 25)
+    text = font.render(str(score), True, (0,0,0))
+    screen.blit(text,(1200,700))
    
     if select_image is not None:                                        
         screen.blit(select_image,(select_x-16,select_y-16))
