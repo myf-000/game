@@ -6,19 +6,19 @@ import json    #引入json库
 from sunflower import Sunflower         #代入自己写的sunflower中的Sunflower类
 from shovel import Shovel
 from zombie import Xiaojimao, Xiaojimaojump
-from xiaobai import Xiaobai
-from card import SunflowerCard, PeaShooterCard, ShovelCard,XiaobaiCard
+from xiaobai import Xiaobai,Xiaobaichuipaopao
+from card import *
 from sun import Sun
 from grid import Grid
 from zombie_factory import ZombieFactory
 
-money = 5000
+money = 100
 
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((1250,720))                           #设置屏幕大小
 
-grid = Grid(320,90,7,5,120)
+grid = Grid(310,90,9,5,95,120)
 # 音乐
 pygame.mixer.music.load(os.path.join(os.getcwd(), "..", "resource","music","18 - Crazy Dave IN-GAME.mp3"))   #加载背景音乐
 pygame.mixer.music.play(-1)                                            #播放背景音乐，-1表示循环播放
@@ -48,10 +48,12 @@ card_sprites = pygame.sprite.Group()
 sunflower_card = SunflowerCard(100,40)
 pea_card = PeaShooterCard(160,40)
 xiaobai_card = XiaobaiCard(220,40)
+xiaobaichuipaopao_card = XiaobaichuipaopaoCard(300,40)
 shovel_card = ShovelCard(500,40)
 
 card_sprites.add(sunflower_card)
 card_sprites.add(xiaobai_card)
+card_sprites.add(xiaobaichuipaopao_card)
 #card_sprites.add(pea_card)
 #card_sprites.add(shovel_card)
 
@@ -91,13 +93,14 @@ zombie_sprites = pygame.sprite.Group()
 # zombie_sprites.add(xiaojimao2)
 # zombie_sprites.add(xiaojimaojump)
 
+state = None
 choose = None
 select_card = None
 select_x = 0
 select_y = 0
 select_image = None
 
-zombie_factory = ZombieFactory()
+zombie_factory = ZombieFactory(grid)
 while True:                                                            #游戏主循环
     if index > 100:                                                    #当index大于100时
         index = 0                                                      #重置index
@@ -108,7 +111,7 @@ while True:                                                            #游戏�
     screen.fill((0,0,0))                                              #清空屏幕，填充颜色
     screen.blit(bg_image,(0,0))    
     screen.blit(seed_image,(0,0))                                       #绘制种子图片
-    grid.draw(screen)
+    #grid.draw(screen)
 
     dt = clock.tick(15) / 1000.0                                      #设置游戏帧率                                                    #设置游戏帧率
     for event in pygame.event.get():                                  #处理事件（鼠标点击、键盘按键等）
@@ -145,6 +148,9 @@ while True:                                                            #游戏�
                         elif select_card == "xiaobai":
                             if money >= plant_data[select_card]['price']:
                                 choose = Xiaobai(grid_x,grid_y)
+                        elif select_card == "xiaobai_chuipaopao":
+                            if money >= plant_data[select_card]['price']:
+                                choose = Xiaobaichuipaopao(grid_x,grid_y)
                         else:
                             choose = None
 

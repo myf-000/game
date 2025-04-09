@@ -5,13 +5,14 @@ from zombie import *
 from utils import load_json
 
 class ZombieFactory:
-    def __init__(self):
+    def __init__(self,grid):
         self.data = load_json('game.json')
         self.last_check_time = 0
         self.cooldown = 1000
         self.zombie_list = []
         self.current_stage = 0
         self.stage_count = len(self.data['stages'])
+        self.grid = grid
         self.prepare_stage_zombie(0)
 
     def prepare_stage_zombie(self,stage):
@@ -34,6 +35,7 @@ class ZombieFactory:
             zombie = self.zombie_list.pop()
 
             x,y = self.random_position()
+            grid_x,grid_y = self.grid.get_center_pos(x,y)
 
             if zombie == "xiaojimao":
                 return Xiaojimao(x,y)
@@ -51,9 +53,10 @@ class ZombieFactory:
             return None
 
     def random_position(self):
-        x=1100
+        x=random.randint(1000, 1100)
         y=random.randint(100, 600)
-        return x,y
+        grid_x,grid_y = self.grid.get_center_pos(x,y)
+        return grid_x,grid_y
 
 
     def check(self,current_time):

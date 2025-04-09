@@ -8,6 +8,8 @@ class Sunflower(Plant):
         self.last_produced_time = 0
         self.can_produce = True
         self.production = None
+        self.top = top
+        self.left = left
 
     def produce(self):
         if self.can_produce:

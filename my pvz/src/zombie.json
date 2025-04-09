@@ -60,9 +60,9 @@
         "cooldown": 1000,
         "image_name": "xiaojimao_strong",
         "image_count": 8,
-        "speed": 0.5,
+        "speed": 2,
         "direction": "left",
-        "health": 500,
-        "level": 3
+        "health": 300,
+        "level": 4
     }
 }

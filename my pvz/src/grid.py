@@ -7,25 +7,26 @@ RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 LIGHT_GRAY = (200, 200, 200)
 class Grid:
-    def __init__(self, x, y, width, height, cell_size):
+    def __init__(self, x, y, width, height, cell_width,cell_height):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.cell_size = cell_size
+        self.cell_width = cell_width
+        self.cell_height = cell_height
         self.grid = [[None for _ in range(height)] for _ in range(width)]
 
 
     def get_cell_center(self, grid_x, grid_y):
-        return (self.x + grid_x * self.cell_size + self.cell_size // 2,
-                self.y + grid_y * self.cell_size + self.cell_size // 2)
+        return (self.x + grid_x * self.cell_width + self.cell_width // 2,
+                self.y + grid_y * self.cell_height + self.cell_height // 2)
 
 
     def get_grid_pos(self, mouse_x, mouse_y):
-        if self.x <= mouse_x < self.x + self.width * self.cell_size and \
-           self.y <= mouse_y < self.y + self.height * self.cell_size:
-            return ((mouse_x - self.x) // self.cell_size,
-                    (mouse_y - self.y) // self.cell_size)
+        if self.x <= mouse_x < self.x + self.width * self.cell_width and \
+           self.y <= mouse_y < self.y + self.height * self.cell_height:
+            return ((mouse_x - self.x) // self.cell_width,
+                    (mouse_y - self.y) // self.cell_height)
         return None
 
 
@@ -46,6 +47,11 @@ class Grid:
                     return True
         return False
 
+    def get_center_pos(self, mouse_x, mouse_y):
+        grid_x,grid_y = self.get_grid_pos(mouse_x, mouse_y)
+
+        return self.get_cell_center(grid_x,grid_y)
+    
     def draw(self, screen):
         # 绘制网格背景
         # pygame.draw.rect(screen, LIGHT_GRAY, 
@@ -56,9 +62,11 @@ class Grid:
         # 绘制网格线
         for x in range(self.width + 1):
             pygame.draw.line(screen, BLACK, 
-                             (self.x + x * self.cell_size, self.y),
-                             (self.x + x * self.cell_size, self.y + self.height * self.cell_size))
+                             (self.x + x * self.cell_width, self.y),
+                             (self.x + x * self.cell_width, self.y + self.height * self.cell_height))
         for y in range(self.height + 1):
-            pygame.draw.line(screen, BLACK, 
-                             (self.x, self.y + y * self.cell_size),
-                             (self.x + self.width * self.cell_size, self.y + y * self.cell_size))
+            pygame.draw.line(
+                screen, BLACK,
+                (self.x, self.y + y * self.cell_height),  # 横线起点（修正：使用 cell_height）
+                (self.x + self.width * self.cell_width, self.y + y * self.cell_height)  # 横线终点
+            )

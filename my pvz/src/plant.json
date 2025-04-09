@@ -24,5 +24,18 @@
         "speed": 0,
         "direction": 0,
         "health": 100
+    },
+    "xiaobai_chuipaopao": {
+        "name": "xiaobai_chuipaopao",
+        "price": 100,
+        "damage": 20,
+        "cooldown": 1000,
+        "production_type": "bullet",
+        "production_count": 1,
+        "image_name" : "xiaobai_chuipaopao",
+        "image_count": 20,
+        "speed": 0,
+        "direction": 0,
+        "health": 100
     }
 }

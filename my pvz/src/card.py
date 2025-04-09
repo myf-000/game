@@ -44,3 +44,7 @@ class XiaobaiCard(Card):
         super().__init__("xiaobai_wandousheshou",center_x,center_y)
         self.name = "xiaobai"
 
+class XiaobaichuipaopaoCard(Card):
+    def __init__(self,center_x,center_y):
+        super().__init__("xiaobai_chuipaopao",center_x,center_y)
+        self.name = "xiaobai_chuipaopao"
