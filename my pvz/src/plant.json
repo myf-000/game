@@ -9,7 +9,7 @@
         "image_name" : "xiaobai_sunflower",
         "image_count": 18,
         "speed": 0,
-        "direction": 0,
+        "direction": "right",
         "health": 100
     },
     "xiaobai": {
@@ -22,7 +22,7 @@
         "image_name" : "xiaobai_wandousheshou",
         "image_count": 13,
         "speed": 0,
-        "direction": 0,
+        "direction": "right",
         "health": 100
     },
     "xiaobai_chuipaopao": {
@@ -35,7 +35,20 @@
         "image_name" : "xiaobai_chuipaopao",
         "image_count": 20,
         "speed": 0,
-        "direction": 0,
+        "direction": "right",
         "health": 100
+    },
+    "xiaobai_car": {
+        "name": "xiaobai_car",
+        "price": 0,
+        "damage": 9999,
+        "cooldown": 1000,
+        "production_type": "",
+        "production_count": 1,
+        "image_name" : "xiaobai_car",
+        "image_count": 20,
+        "speed": 0,
+        "direction": "right",
+        "health": 9999
     }
 }

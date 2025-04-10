@@ -31,6 +31,8 @@ class Grid:
 
 
     def place_plant(self, plant, grid_x, grid_y):
+        if grid_x == 0 and plant != "xiaobai_car":
+            return False
         if 0 <= grid_x < self.width and 0 <= grid_y < self.height:
             if self.grid[grid_x][grid_y] is None:
                 center_x, center_y = self.get_cell_center(grid_x, grid_y)

@@ -3,14 +3,11 @@ import sys     #引入系统库
 import os      #引入操作系统库
 import json    #引入json库
 
-from sunflower import Sunflower         #代入自己写的sunflower中的Sunflower类
-from shovel import Shovel
-from zombie import Xiaojimao, Xiaojimaojump
-from xiaobai import Xiaobai,Xiaobaichuipaopao
 from card import *
 from sun import Sun
 from grid import Grid
 from zombie_factory import ZombieFactory
+from plant_factory import PlantFactory
 
 money = 200
 
@@ -18,7 +15,7 @@ pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((1250,720))                           #设置屏幕大小
 
-grid = Grid(310,90,9,5,95,120)
+grid = Grid(215,90,10,5,95,120)
 # 音乐
 pygame.mixer.music.load(os.path.join(os.getcwd(), "..", "resource","music","18 - Crazy Dave IN-GAME.mp3"))   #加载背景音乐
 pygame.mixer.music.play(-1)                                            #播放背景音乐，-1表示循环播放
@@ -60,38 +57,17 @@ card_sprites.add(xiaobaichuipaopao_card)
 # 定义子弹
 bullet_sprites = pygame.sprite.Group()
 
-
-
 index = 0                                                              #初始化index
 
 clock = pygame.time.Clock()                                            #设置游戏时钟
 
 # 定义阳光
 sun_sprites = pygame.sprite.Group()
-
 sun = Sun(10,600,600)
-
 sun_sprites.add(sun)
 
 # 定义僵尸
 zombie_sprites = pygame.sprite.Group()
-
-
-# zombie1 = Zombie(1000,100)
-# zombie2 = Zombie(1000,200)
-# zombie3 = Zombie(1000,300)
-
-# xiaojimao1 = Xiaojimao(1000,400)
-# xiaojimao2 = Xiaojimao(1000,500)
-# xiaojimaojump = Xiaojimaojump(1000,200)
-
-# zombie_sprites.add(zombie1)
-# zombie_sprites.add(zombie2)
-# zombie_sprites.add(zombie3)
-
-# zombie_sprites.add(xiaojimao1)
-# zombie_sprites.add(xiaojimao2)
-# zombie_sprites.add(xiaojimaojump)
 
 score = 0
 state = None
@@ -102,17 +78,31 @@ select_y = 0
 select_image = None
 
 zombie_factory = ZombieFactory(grid,"forever")
+plant_factory = PlantFactory(grid)
+
+for y in range(200,700,120):
+    x = 400
+    plant_sprites.add(plant_factory.create_plant(money,"xiaobai_car",x,y))
+# plant1 = plant_factory.create_plant(money,"xiaobai_car",400,200)
+# plant2 = plant_factory.create_plant(money,"xiaobai_car",400,320)
+# plant3 = plant_factory.create_plant(money,"xiaobai_car",400,480)
+# # plant4 = plant_factory.create_plant(money,"xiaobai_car",400,200)
+# # plant5 = plant_factory.create_plant(money,"xiaobai_car",400,200)
+# plant_sprites.add(plant1)
+# plant_sprites.add(plant2)
+# plant_sprites.add(plant3)
+# plant_sprites.add(plant4)
+# plant_sprites.add(plant5)
+
 while True:                                                            #游戏主循环
     if index > 100:                                                    #当index大于100时
         index = 0                                                      #重置index
-
-
 
     # 绘制游戏背景
     screen.fill((0,0,0))                                              #清空屏幕，填充颜色
     screen.blit(bg_image,(0,0))    
     screen.blit(seed_image,(0,0))                                       #绘制种子图片
-    #grid.draw(screen)
+    grid.draw(screen)
 
     dt = clock.tick(15) / 1000.0                                      #设置游戏帧率                                                    #设置游戏帧率
     for event in pygame.event.get():                                  #处理事件（鼠标点击、键盘按键等）
@@ -139,30 +129,12 @@ while True:                                                            #游戏�
             if event.button == 1:
                 x,y = event.pos
                 if select_image is not None:
-                    grid_pos = grid.get_grid_pos(x,y)
-                    if grid_pos:
-                        grid_x,grid_y = grid_pos
-                        if select_card == "sunflower":
-                            if money >= plant_data[select_card]['price']:
-                                choose = Sunflower(grid_x,grid_y)
+                    choose = plant_factory.create_plant(money,select_card,x,y)
 
-                        elif select_card == "xiaobai":
-                            if money >= plant_data[select_card]['price']:
-                                choose = Xiaobai(grid_x,grid_y)
-                        elif select_card == "xiaobai_chuipaopao":
-                            if money >= plant_data[select_card]['price']:
-                                choose = Xiaobaichuipaopao(grid_x,grid_y)
-                        else:
-                            choose = None
-
-                        if choose is not None:
-                            if not grid.place_plant(choose,grid_x,grid_y):
-                                choose.kill()
-                                choose = None
-                            else:
-                                money -= plant_data[select_card]['price']
-                                plant_sprites.add(choose)
-                                choose = None
+                    if choose is not None:
+                        money -= plant_data[select_card]['price']
+                        plant_sprites.add(choose)
+                        choose = None
                     select_image = None
                     select_card = None
 
@@ -216,9 +188,13 @@ while True:                                                            #游戏�
     # 僵尸和植物碰撞检测
     plant_collisions = pygame.sprite.groupcollide(plant_sprites,zombie_sprites,False, False)
     for plant,zombies  in plant_collisions.items():
+        plant.handle_collision()
         for zombie in zombies:
             if zombie.attack(current_time)  == True:
                 plant.health -= zombie.damage
+                zombie.health -= plant.damage
+                if zombie.health <= 0:
+                    zombie.kill()
                 if plant.health <= 0:
                     grid.remove_plant(plant)
                     plant.kill()
