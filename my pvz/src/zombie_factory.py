@@ -6,7 +6,7 @@ from utils import load_json
 
 class ZombieFactory:
     def __init__(self,grid,mode):
-        self.data = load_json('game.json')
+        self.data = load_json('data/game.json')
         self.last_check_time = 0
         self.cooldown = 1000
         self.zombie_list = []
@@ -39,7 +39,6 @@ class ZombieFactory:
                 zombie = self.random_create_zombie()
 
             x,y = self.random_position()
-            grid_x,grid_y = self.grid.get_center_pos(x,y)
 
             if zombie == "xiaojimao":
                 return Xiaojimao(x,y)
@@ -73,3 +72,6 @@ class ZombieFactory:
         zombie_type = [ "xiaojimao","xiaojimao_jump","xiaojimao_bag","xiaojimao_music","xiaojimao_strong"]
 
         return random.choice(zombie_type)
+    
+    def create_death_zombie(self,x,y,current_time):
+        return Xiaojimaodeath(x,y,current_time)

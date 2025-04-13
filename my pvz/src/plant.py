@@ -1,12 +1,13 @@
 import random
 from bullet import Bullet
 from sun import Sun
+from bomb import Bomb
 from entity import Entity
 from utils import load_json
 
 class Plant(Entity):
     def __init__(self,plant_name,center_x,center_y):
-        data = load_json("plant.json")
+        data = load_json("data/plant.json")
         image_name = data[plant_name]["image_name"]
         image_count = data[plant_name]["image_count"]
         speed = data[plant_name]["speed"]
@@ -21,6 +22,8 @@ class Plant(Entity):
         self.production_count = data[plant_name]["production_count"]
         self.production = None
         self.price = data[plant_name]["price"]
+        self.name = data[plant_name]["name"]
+        self.dead = False
 
     def update(self,index,current_time):
         super().update(index)
@@ -106,6 +109,46 @@ class Xiaobaiboxer(Plant):
     def produce(self):
         if self.can_produce:
             self.production = Bullet(self.rect.right,self.rect.y+15,5)
+            self.can_produce = False
+            return (self.production_type,self.production_count,self.production)
+        else:
+            return False
+        
+class Xiaobaideath(Plant):
+    def __init__(self,top,left,create_time):
+        super().__init__("xiaobai_death",top,left)
+        self.last_produced_time = 0
+        self.can_produce = False
+        self.production = None
+        self.create_time = create_time
+        self.alive_time = 800
+        
+    def update(self,index,current_time):
+        super().update(index,current_time)
+
+        if current_time - self.create_time > self.alive_time:
+            self.kill()
+
+class Xiaobaibomb(Plant):
+    def __init__(self,top,left,create_time):
+        super().__init__("xiaobai_bomb",top,left)
+        self.last_produced_time = 0
+        self.can_produce = True
+        self.production = None
+        self.alive_time = 800
+        self.create_time = create_time
+        self.dead = False
+        
+    def update(self,index,current_time):
+        super().update(index,current_time)
+
+        if current_time - self.create_time > self.alive_time:
+            self.dead = True
+
+    def produce(self):
+        if self.can_produce:
+            x,y = self.rect.center
+            self.production = Bomb(self.last_produced_time,x,y)
             self.can_produce = False
             return (self.production_type,self.production_count,self.production)
         else:

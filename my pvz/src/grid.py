@@ -31,7 +31,8 @@ class Grid:
 
 
     def place_plant(self, plant, grid_x, grid_y):
-        if grid_x == 0 and plant != "xiaobai_car":
+        if plant.name != "xiaobai_car" and grid_x == 0:
+            print("4")
             return False
         if 0 <= grid_x < self.width and 0 <= grid_y < self.height:
             if self.grid[grid_x][grid_y] is None:

@@ -2,26 +2,15 @@ import pygame
 import os
 
 class Entity(pygame.sprite.Sprite):
-    def __init__(self,image_name,image_count,center_x,center_y,speed=0,direction="right"):
+    def __init__(self,image_name,image_count,center_x,center_y,speed=0,direction="right",scale=False,size=(95,95)):
         super().__init__()
         self.image_path = os.path.join(os.getcwd(), "..", "resource","images")
         self.images = []
         self.image_count = image_count
-        Entity_SIZE = (100,100)
-        if image_count == 1:
-            img = pygame.image.load(os.path.join(self.image_path, "{}.png".format(image_name))).convert_alpha()
-            # img  = pygame.transform.scale(img , Entity_SIZE)
-            #img = pygame.transform.smoothscale(img, Entity_SIZE)
+        self.images = []
+        self.image = None
+        self.load_images(image_name,image_count,scale,size)
 
-            self.images.append(img)
-        else:
-            for i in range(0, image_count):
-                img = pygame.image.load(os.path.join(self.image_path, "{}_{:02d}.png".format(image_name,i))).convert_alpha()
-                #img  = pygame.transform.scale(img , Entity_SIZE)
-                #img = pygame.transform.smoothscale(img, Entity_SIZE)
-                self.images.append(img)
-
-        self.image = self.images[0]
         self.rect = self.image.get_rect()
         self.rect.center = (center_x, center_y)
         self.speed = speed
@@ -44,3 +33,24 @@ class Entity(pygame.sprite.Sprite):
 
     def shoot(self):
         return False
+    
+    def load_images(self,image_name,image_count,scale,size):
+        new_images = []
+        if image_count == 1:
+            img = pygame.image.load(os.path.join(self.image_path, "{}.png".format(image_name))).convert_alpha()
+            if scale:
+                img  = pygame.transform.scale(img , size)
+                img = pygame.transform.smoothscale(img, size)
+
+            new_images.append(img)
+        else:
+            for i in range(0, image_count):
+                img = pygame.image.load(os.path.join(self.image_path, "{}_{:02d}.png".format(image_name,i))).convert_alpha()
+                if scale:
+                    img  = pygame.transform.scale(img , size)
+                    img = pygame.transform.smoothscale(img, size)
+                new_images.append(img)       
+                
+        self.images[:] = new_images 
+        self.image_count = image_count
+        self.image = self.images[0]

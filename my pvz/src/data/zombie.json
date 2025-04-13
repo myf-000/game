@@ -10,6 +10,17 @@
         "health": 100,
         "level": 1
     },
+    "xiaojimao_death": {
+        "name": "xiaojimao_death",
+        "damage": 0,
+        "cooldown": 1000,
+        "image_name": "xiaojimao_death",
+        "image_count": 12,
+        "speed": 0,
+        "direction": "left",
+        "health": 0,
+        "level": 0
+    },
     "xiaojimao": {
         "name": "xiaojimao",
         "damage": 20,

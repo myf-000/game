@@ -1,6 +1,8 @@
 import pygame
 import os
 
+from utils import load_json
+
 class Card(pygame.sprite.Sprite):
     def __init__(self,image_name,center_x,center_y):
         super().__init__()
@@ -12,6 +14,8 @@ class Card(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
         self.rect.center = (center_x, center_y)
+        self.data = load_json("data/plant.json")
+        self.disable = True
 
     def start_drag(self):
         self.dragging = True
@@ -23,6 +27,11 @@ class Card(pygame.sprite.Sprite):
         if self.dragging:
             self.rect.center(dx, dy)
 
+    def update(self,money):
+        if money > self.data[self.name]["price"]:
+            self.disable = True
+        else:
+            self.disable = False
 
 class SunflowerCard(Card):
     def __init__(self,center_x,center_y):
@@ -48,3 +57,13 @@ class XiaobaichuipaopaoCard(Card):
     def __init__(self,center_x,center_y):
         super().__init__("xiaobai_chuipaopao",center_x,center_y)
         self.name = "xiaobai_chuipaopao"
+
+class XiaobaiboxerCard(Card):
+    def __init__(self,center_x,center_y):
+        super().__init__("xiaobai_boxer",center_x,center_y)
+        self.name = "xiaobai_boxer"
+
+class XiaobaibombCard(Card):
+    def __init__(self,center_x,center_y):
+        super().__init__("xiaobai_bomb",center_x,center_y)
+        self.name = "xiaobai_bomb"

@@ -1,4 +1,17 @@
 {
+    "xiaobai_death": {
+        "name": "sunflower",
+        "price": 0,
+        "damage": 0,
+        "cooldown": 5000,
+        "production_type": "",
+        "production_count": 1,
+        "image_name" : "xiaobai_death",
+        "image_count": 16,
+        "speed": 0,
+        "direction": "right",
+        "health": 0
+    },
     "sunflower": {
         "name": "sunflower",
         "price": 50,
@@ -29,7 +42,7 @@
         "name": "xiaobai_chuipaopao",
         "price": 100,
         "damage": 20,
-        "cooldown": 1000,
+        "cooldown": 2000,
         "production_type": "bullet",
         "production_count": 1,
         "image_name" : "xiaobai_chuipaopao",
@@ -50,5 +63,31 @@
         "speed": 0,
         "direction": "right",
         "health": 9999
+    },
+    "xiaobai_boxer": {
+        "name": "xiaobai_boxer",
+        "price": 100,
+        "damage": 20,
+        "cooldown": 1000,
+        "production_type": "",
+        "production_count": 1,
+        "image_name" : "xiaobai_boxer",
+        "image_count": 18,
+        "speed": 0,
+        "direction": "right",
+        "health": 200
+    },
+    "xiaobai_bomb": {
+        "name": "xiaobai_bomb",
+        "price": 150,
+        "damage": 0,
+        "cooldown": 1000,
+        "production_type": "bomb",
+        "production_count": 1,
+        "image_name" : "xiaobai_bomb",
+        "image_count": 21,
+        "speed": 0,
+        "direction": "right",
+        "health": 1000
     }
 }
